@@ -1,0 +1,6 @@
+.env
+env
+concept.py
+db_concept.py
+.idea
+__pycache__
