@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %} AlSys - Record attendance {% endblock %}
+
+{% block main %}
+<div class="row text-center">
+    <form action="{{ url_for('attendance.process_form') }}" method="get">
+        <input type="text" name="name" id="" class="form-control" placeholder="Attendee name" autofocus> <br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
