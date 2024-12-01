@@ -1,21 +1,24 @@
-import os
-from app import db
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+import sqlite3
 
-class Base(DeclarativeBase):
-    pass
+db_name = "concept.db"
 
+conn = sqlite3.connect(":memory:")
 
-
-
-class AttendanceSheet(db.Model):
-    __tablename__ = "attendance_table"
-    id = db.Column(db.Integer, primary_key = True)
+cursor = conn.cursor()
 
 
-class User(db.Model):
-    id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
-    username: Mapped[str] = mapped_column(db.String, unique=True, nullable=False)
+cursor.execute("""
+CREATE TABLE attendance (
+               id integer,
+               name text,
+               rank text)
+""")
 
+conn.commit()
+conn.execute(""" INSERT INTO attendance VALUES (4, "Benedicta", "Hi") """)
+print(conn.execute(""" SELECT name FROM attendance """).fetchall())
+conn.total_changes
+print()
 
-db.create_all()
+conn.commit()
+conn.close()

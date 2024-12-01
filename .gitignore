@@ -1,0 +1,5 @@
+env*
+concept.py
+.env
+.idea*
+__pycache__*

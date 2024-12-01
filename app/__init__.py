@@ -1,13 +1,12 @@
-import os
-from dotenv import load_dotenv
 from flask import Flask, render_template
+from app.views.attendance import attendance
+from app.ext.db_config import engine
 
-from app.views import attendance
 
 app = Flask(__name__)
-load_dotenv()
-app.secret_key = os.environ["FLASK_SECRET_KEY"]
+app.config.from_object("app.ext.config.Config")
 app.register_blueprint(attendance)
+
 
 
 @app.route("/")
