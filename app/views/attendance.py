@@ -41,6 +41,7 @@ def view_attendance():
     return render_template("forms/attendView.html", attendance=db_attendance, total_len=total_attendance)
 
 
+
 @attendance.route("/process")
 def process_form():
     """
