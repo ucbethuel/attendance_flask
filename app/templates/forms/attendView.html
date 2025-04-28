@@ -12,11 +12,12 @@
 <a href="{{ url_for('attendance.index') }}"><button class="btn btn-primary ms-5">Add attendance</button></a>
 <h1 class="text-center">List of attendance list </h1>
 <p class="text-center">Today attendance totals: {{ total_len }}</p>
+
 <table class="table table-striped align-items-center">
     <thead>
         <th>#</th>
         <th>Name</th>
-        <th>Rank</th>
+        <th>Action</th>
     </thead>
 
     <tbody>
@@ -26,7 +27,12 @@
     <tr>
         <th>{{ person.id }}</th>
         <td>{{ person.name }}</td>
-        <td>{{ person.rank }}</td>
+        <td>
+            <form action="{{ url_for('attendance.delete_user', id = person.id) }}" method="post" id="delete item">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
+        </td>
     </tr>
     {% endfor %}
 

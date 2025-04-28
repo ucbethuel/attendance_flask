@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 from app.views.attendance import attendance
-from app.ext.db_config import engine
 
 
 app = Flask(__name__)

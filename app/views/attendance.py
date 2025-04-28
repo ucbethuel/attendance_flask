@@ -3,6 +3,7 @@ from app.models.AttendanceModel import AttendanceModel
 from app.ext.db_config import session
 
 
+
 """
 The attendance path views and logic.
 """
@@ -40,7 +41,17 @@ def view_attendance():
     total_attendance = len(db_attendance)
     return render_template("forms/attendView.html", attendance=db_attendance, total_len=total_attendance)
 
+@attendance.route("/delete_user/<int:id>", methods = ["POST", "DELETE"])
+def delete_user(id):
+    # print(url_for("attendance.delete_user", id_path = id))
+    method = request.form.get("_method")
+    if method == "DELETE":
+        record = session.query(AttendanceModel).filter(id == AttendanceModel.id).first()
+        session.delete(record)
+        session.commit()
+    flash("Recorded successfully", "success")
 
+    return redirect(url_for("attendance.view_attendance"))
 
 @attendance.route("/process")
 def process_form():
